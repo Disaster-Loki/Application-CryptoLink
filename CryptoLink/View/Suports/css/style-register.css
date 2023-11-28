@@ -1,0 +1,145 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.hero{
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgb(75, 63, 248), #3a1c64);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+} 
+
+.form-box{
+  position: relative;
+      top: 50%;
+      left: 50%;
+      width: 380px;
+      height: 65vh;
+      padding: 40px;
+      transform: translate(-50%, -50%);
+      background: rgba(0,0,0,.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 7px;
+      overflow: hidden;
+}
+
+.tit-btn{
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-top: 0;
+}
+
+h2{
+  color: whitesmoke;
+}
+
+hr{
+  width: 100%;
+  color: whitesmoke;
+  margin: 10px;
+}
+
+.button-box{
+  display: flex;
+  width: 220px;
+  margin: 10px 35px 35px 35px;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+}
+
+button [type="button"]{
+  cursor: pointer;
+  padding: 0;
+  color: #999;
+}
+
+.toggle-btn{
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+  color: whitesmoke;
+}
+
+#btn{
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 110px;
+  height: 100%;
+  background: linear-gradient(to right,rgb(75, 63, 248), #3a1c64);
+  border-radius: 30px;
+  border: 2px solid rgb(75, 63, 248);
+  transition: .5s;
+}
+
+.form-box .button-box #btn .toggle-btn{
+  color: whitesmoke;
+  background: white;
+} 
+
+.form-box form input{
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.form-box form button{
+  margin-top: 15px;
+}
+
+.form-box form button:hover{
+  background: transparent;
+  border: 2px solid rgb(75, 63, 248);
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.input-group{
+  top: 25vh;
+  position: absolute;
+  width: 280px;
+  transition: .5s;
+}
+
+.input-field{
+  width: 100%;
+  padding: 10px 0;
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background:transparent;
+  color: whitesmoke;
+}
+
+.submit-btn{
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background: linear-gradient(to right,rgb(75, 63, 248), #3a1c64);
+  border: 0;
+  outline: none;
+  border-radius: 27px;
+  color: whitesmoke;
+  font-weight: 500;
+}
+
+#common{
+  left: 50px;
+}
+
+#anonymous{
+  left: 450px;
+}
