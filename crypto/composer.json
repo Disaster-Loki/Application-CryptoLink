@@ -1,0 +1,17 @@
+{
+    "name": "decep/cryptolink",
+    "authors": [
+        {
+            "name": "Decepticon",
+            "email": "decepticonmegatron20-04@outlook.pt"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "crypto\\": "app/"
+        }
+    },
+    "require": {
+        "league/plates": "^3.5"
+    }
+}
