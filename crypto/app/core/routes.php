@@ -20,7 +20,16 @@ $routes = [
         '/admin' => [
             'controller'    => 'UserController',
             'action'        => 'admin'
-        ]
+        ],
+        '/logout' => [
+            'controller'    => 'LoginController',
+            'action'        => 'logout'
+        ],
+        '/admin' => [
+            'controller'    => 'AdminController',
+            'action'        => 'index'
+        ],
+        
     ],
     'POST' => [
         '/login' => [
@@ -31,6 +40,15 @@ $routes = [
             'controller'    => 'RegisterController',
             'action'        => 'registerAction'
         ],
+        '/update-user' =>[
+            'controller'    => 'UserController',
+            'action'        => 'updateAction'
+        ],
+        '/add-transaction' => [
+            'controller'    => 'TransactionController',
+            'action'        => 'save'
+        ]
+
     ],
 ];
 

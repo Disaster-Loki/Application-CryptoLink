@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'vendor/autoload.php';
 require_once 'app/core/routes.php';
 require_once 'app/Common.php';

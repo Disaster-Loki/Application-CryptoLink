@@ -1,19 +1,22 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin</title>
+  <title>user</title>
   <!-- ======== Style ========= -->
-  <link rel="stylesheet" href="<?= base_url('public/') ?>css/style-admin.css">
-
+  <link rel="stylesheet" href="<?= base_url('public/') ?>css/style-user.css">
   <!-- Boxicons CSS -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
 </head>
 
 <body>
+  <?php include_once("header.php") ?>
+  <br>
   <!-- ========== Siderbar ========= -->
   <nav class="siderbar close">
     <header>
@@ -43,9 +46,9 @@
             </a>
           </li>
           <li class="nav-link">
-            <a href="#" class="custo" onclick="ShowPage('customers')">
-              <i class='bx bx-user icon'></i>
-              <span class="text nav-text">Customers</span>
+            <a href="#" class="market" onclick="ShowPage('marketplace')">
+              <i class='bx bxs-store-alt icon'></i>
+              <span class="text nav-text">Marketplace</span>
             </a>
           </li>
           <li class="nav-link">
@@ -55,9 +58,16 @@
             </a>
           </li>
           <li class="nav-link">
-            <a href="#" class="sett" onclick="ShowPage('settings')">
-              <i class='bx bx-cog icon'></i>
-              <span class="text nav-text">Settings</span>
+            <a href="#" class="wall" onclick="ShowPage('wallet')">
+              <i class='bx bx-wallet icon'></i>
+              <span class="text nav-text">wallet</span>
+            </a>
+          </li>
+          <hr>
+          <li class="nav-link">
+            <a href="#" class="pro" onclick="ShowPage('profile')">
+              <i class='bx bxs-user icon'></i>
+              <span class="text nav-text">Profile</span>
             </a>
           </li>
         </ul>
@@ -95,8 +105,8 @@
         <div class="cardBox">
           <div class="card">
             <div>
-              <div class="numbers"><?= count($users) ?></div>
-              <div class="cardName">Usuarios</div>
+              <div class="numbers">1,504</div>
+              <div class="cardName">Profile</div>
             </div>
 
             <div class="iconBx">
@@ -106,12 +116,12 @@
 
           <div class="card">
             <div>
-              <div class="numbers">80</div>
-              <div class="cardName">Bitcoin</div>
+              <div class="numbers">$<?= $total ?></div>
+              <div class="cardName">Wallet</div>
             </div>
 
             <div class="iconBx">
-              <ion-icon name="logo-bitcoin"></ion-icon>
+              <ion-icon name="wallet-outline"></ion-icon>
             </div>
           </div>
 
@@ -136,117 +146,77 @@
               <ion-icon name="cash-outline"></ion-icon>
             </div>
           </div>
-          <div class="cardBox2">
-            <div class="card2">
+        </div>
+        <!-- Grafics-->
+        <!--<div class="grafics">
+            <canvas id="bitcoin-chart" class="chart-card"></canvas>
+            <canvas id="ethereum-chart" class="chart-card"></canvas>
+            <canvas id="bnb-chart" class="chart-card"></canvas>
+        </div>-->
+      </div>
+    </div>
+
+    <div id="marketplace" class="page">
+      <div class="text">Marketplace
+        <hr>
+      </div>
+      <div class="main2">
+        <div class="cardBox2">
+          <div class="card2">
+            <div class="iconBx2">
+              <ion-icon name="logo-bitcoin"></ion-icon>
             </div>
+            <div class="info">
+              <div class="cardName2">Vendedor</div>
+              <div class="postDate">Data</div>
+            </div>
+            <div class="numbers2">R$ 80,00</div>
+          </div>
+          <div class="card2">
+            <div class="iconBx2">
+              <ion-icon name="">
+                <img src="ethereum.png" alt="Ethereum" style="color: white;">
+              </ion-icon>
+            </div>
+            <div class="info">
+              <div class="cardName2">Vendedor</div>
+              <div class="postDate">Data</div>
+            </div>
+            <div class="numbers2">R$ 80,00</div>
+          </div>
+          <div class="card2">
+            <div class="iconBx2">
+              <ion-icon name="logo-bitcoin"></ion-icon>
+            </div>
+            <div class="info">
+              <div class="cardName2">Vendedor</div>
+              <div class="postDate">Data</div>
+            </div>
+            <div class="numbers2">R$ 80,00</div>
+          </div>
+          <div class="card2">
+            <div class="iconBx2">
+              <ion-icon name="logo-bitcoin"></ion-icon>
+            </div>
+            <div class="info">
+              <div class="cardName2">Vendedor</div>
+              <div class="postDate">Data</div>
+            </div>
+            <div class="numbers2">R$ 80,00</div>
+          </div>
+          <div class="card2">
+            <div class="iconBx2">
+              <ion-icon name="logo-bitcoin"></ion-icon>
+            </div>
+            <div class="info">
+              <div class="cardName2">Vendedor</div>
+              <div class="postDate">Data</div>
+            </div>
+            <div class="numbers2">R$ 80,00</div>
           </div>
         </div>
       </div>
     </div>
-
-    <div id="customers" class="page">
-      <div class="text">Customers
-        <hr>
-      </div>
-      <div class="main2">
-        <!-- ================ Order Details List ================= -->
-        <div class="details">
-          <div class="recentOrders">
-            <div class="cardHeader">
-              <h2>Usuarios</h2>
-              <a href="#" class="btn">View All</a>
-            </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Registration Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($users as $user) : ?>
-                  <tr>
-                    <td><?php echo $user['Username']; ?></td>
-                    <td><?php echo $user['Email']; ?></td>
-                    <td><?php echo $user['DataRegistro']; ?></td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-
-            <!--<table>
-                        <thead>
-                            <tr>
-                                <td>Username</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-                        </tbody>
-                    </table>-->
-          </div>
-        </div>
-      </div>
     </div>
 
     <div id="over" class="page">
@@ -296,7 +266,67 @@
       </div>
     </div>
 
-    <div id="settings" class="page">
+    <div id="wallet" class="page">
+      <div class="text">Wallet
+        <hr>
+      </div>
+      <div class="main5">
+        <div class="credit-card">
+          <div class="card-header">
+            <div class="card-title"><?= $_SESSION['user']['username'] ?></div>
+            <div class="card-logo">
+              <!-- Adicione aqui o ícone do cartão -->
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="card-number">**** **** **** 1234</div>
+          <div class="card-info">
+            <div class="info-item">
+              <div class="label">Validade</div>
+              <div class="value">12/23</div>
+            </div>
+            <div class="info-item">
+              <div class="label">Saldo</div>
+              <div class="value"><?= $total ?></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="transaction-history">
+          <h2>Transactions</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($transactions as $transaction): ?>
+              <tr>
+                <td><?= $transaction['DataHoraTransacao'] ?></td>
+                <td><?= $transaction['TipoTransacao'] ?></td>
+                <td>$<?= $transaction['ValorTransacao'] ?></td>
+              </tr>
+              <?php endforeach ?>
+              <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+          </table>
+
+          <div class="alter">
+            <form action="add-transaction" method="post">
+              <input type="number" placeholder="Valor" required name="amount" min="10">
+              <input type="hidden" name="id" value="<?= getUserByNickname($_SESSION['user']['username'])[0]['UserID'] ?>">
+              <button type="submit" class="butt">Change</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="profile" class="page">
       <div class="text">Settings
         <hr>
       </div>
@@ -307,12 +337,13 @@
           </div>
           <div class="basic">
             <span class="icon"><i class='bx bx-user-circle'></i></span>
-            <span class="name"><br> Mundo Cruel</span>
+            <span class="name"><br> <?= $_SESSION['user']['username'] ?></span>
           </div>
           <div class="alter">
-            <form action="">
-              <input type="text" placeholder="Username" required>
-              <input type="password" placeholder="Password" required>
+            <form action="update-user" method="post">
+              <input type="text" placeholder="Username" required name="username">
+              <input type="password" placeholder="Password" required name="password">
+              <input type="hidden" name="id" value="<?= getUserByNickname($_SESSION['user']['username'])[0]['UserID'] ?>">
               <button type="submit" class="butt">Change</button>
             </form>
           </div>
@@ -364,13 +395,13 @@
 
 
   <!-- ======= Script js ======== -->
-  <script src="<?= base_url('public/') ?>js/admin.js"></script>
-
+  <script src="<?= base_url('public/') ?>js/user.js"></script>
   <!-- ====== ionicons ======= -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <!-- ======== Graphics=========== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>

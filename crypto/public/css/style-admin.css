@@ -31,11 +31,11 @@ body{
 }
 
 body.dark{
-    --body-color: #18191A;
-    --siderbar-color: #242526;
-    --primary-color: #3A383C;
+    --body-color: #202020;
+    --siderbar-color: rgb(10, 10, 10);
+    --primary-color: #9123ff;
     --primary-color-light: #3A3B3C;
-    --toggle-color: #FFF;
+    --toggle-color: #414040;
     --text-color: #CCC;
 }
 
@@ -308,7 +308,7 @@ body.dark .switch::before{
     font-weight: 500;
     color: var(--text-color);
     padding: 8px 40px;
-    transition: var(--trab-04);
+    transition: var(--trab-05);
 }
 
 .siderbar.close ~ .home {
@@ -327,7 +327,7 @@ body.dark .switch::before{
     width: calc(100% - 80px);
     left: 40px;
     min-height: 100vh;
-    background: var(--siderbar-color);
+    /*background: var(--siderbar-color);*/
     transition: 0.5s;
   }
   .main.active {
@@ -356,6 +356,7 @@ body.dark .switch::before{
     cursor: pointer;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   }
+
   
   .cardBox .card .numbers {
     position: relative;
@@ -383,6 +384,15 @@ body.dark .switch::before{
   .cardBox .card:hover .iconBx {
     color: var(--siderbar-color);
   }
+
+  .cardBox2 {
+    position: relative;
+    width: 215%;
+    padding: 20px;
+    height: 40vh;
+    border-radius: 20px;
+    border: 3px solid blue;
+  }
   
   /* ================ Customers ================ */
   /* ============ Order Details List ========== */
@@ -394,6 +404,7 @@ body.dark .switch::before{
     min-height: 100vh;
     background: var(--siderbar-color);
     transition: 0.5s;
+    border-radius: 10px;
     
   }
   
@@ -578,6 +589,7 @@ body.dark .switch::before{
       padding-bottom: 10px;
       display: flex;
       padding-bottom: 20px;
+      border-radius: 10px;
     }
 
     .main3 .graphic {
@@ -626,14 +638,6 @@ body.dark .switch::before{
 
 
 
-
-
-
-
-
-
-
-
   /* ========= Setting =========== */
 
   .main4 {
@@ -644,6 +648,7 @@ body.dark .switch::before{
     background: var(--siderbar-color);
     display: flex;
     transition: 0.5s;
+    border-radius: 10px;
   }
 
   /*========= Profile ===========*/

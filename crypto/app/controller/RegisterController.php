@@ -23,7 +23,10 @@ class RegisterController extends Controller
         $usuarioDAO = new UsuarioDAO();
         $usuarioDAO->insertUser($usuarioDTO->getEmail(), $usuarioDTO->getUsername(), $usuarioDTO->getPassword(), $usuarioDTO->getDataRegistro());
 
-        header("Location: ../View/user/user.php");
+         
+        return redirect(base_url('home'));
         exit();
     }
+
+    
 }
