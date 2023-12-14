@@ -15,7 +15,8 @@
     --primary-color: #9400D3;
     --primary-color-light: #3A3B3C;
     --toggle-color: #414040;
-    --text-color: #CCC;
+    --text-color: #dfdfdf;
+    --text-color2: rgba(255, 255, 255, 0.938);
 
     /* ======= Transition ======== */
     --trab-02: all 0.2s ease;
@@ -37,6 +38,7 @@ body.dark{
     --primary-color-light: #f6f5ff;
     --toggle-color: #ddd;
     --text-color: #707070;
+    --text-color2: rgba(255, 255, 255, 0.938);
 }
 
 /* ===== Siderbar ===== */
@@ -334,7 +336,34 @@ body.dark .switch::before{
     width: calc(100% - 80px);
     left: 80px;
   }
-  
+
+  .main .graphic {
+    width: 50%;
+    padding: 10px;
+    margin: 15px;
+    margin-top: 10px;
+    background-color: var(--siderbar-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+ .main .graphic2 {
+  width: 20%;
+  height: 400px;
+  margin: 15px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+#cryptoChart, #cryptoChart2 {
+    width: 100%;
+    height: auto;
+}
 
   /* ================= Cards ================ */
   .cardBox {
@@ -385,19 +414,9 @@ body.dark .switch::before{
     color: var(--siderbar-color);
   }
 
-  /*.grafics {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: black;
-    padding: 20px;
-}
+  /* ========= Calendar ========== */
 
-.chart-card {
-    width: 28%;
-    height: 20%;
-    background-color: black;
-    margin-bottom: 10px;
-}*/
+
   
   /* ================ Marketplace ================ */
   .main2 {
@@ -409,6 +428,29 @@ body.dark .switch::before{
     transition: 0.5s;
     border-radius: 10px;
   }
+
+  /* ================= Button ================ */
+
+  .main2 .button{
+    display: flex;
+    width: 100%;
+    align-items: end;
+    justify-content: end;
+  }
+  .main2 .button .sell-button{
+    height: 35px;
+    width: 100px;
+    background: var(--primary-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 20px;
+    font-weight: 500;
+    border: 1;
+  }
+
+  .main2 .button .sell-button:hover{
+    background: rgb(22, 6, 253);
+  }
   /* ================= Cards ================ */
   .cardBox2 {
     position: relative;
@@ -419,7 +461,6 @@ body.dark .switch::before{
     display: flex;
     flex-wrap: wrap;
   }
-  
   .cardBox2 .card2 {
     background: black;
     flex-basis: calc(40vh - 20px);
@@ -461,8 +502,81 @@ body.dark .switch::before{
     color: var(--text-color);
     font-weight: 500;
   }
-  
-  
+
+  /* ======== Modal ======== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+  /* ================= Form Sell ================ */
+
+.box {
+  width: 30%;
+  height: auto;
+  color: var(--text-color);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.box fieldset {
+  border: 3px solid var(--primary-color);
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.box legend {
+  border: 1px solid var(--primary-color);
+  padding: 10px;
+  text-align: center;
+  background-color: var(--primary-color);
+  border-radius: 8px;
+}
+
+.box .inputBox {
+  margin-bottom: 15px;
+}
+
+.box .inputUser {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text-color);
+  outline: none;
+  color: var(--text-color);
+  font-size: 15px;
+  width: 100%;
+  padding: 10px;
+  letter-spacing: 2px;
+}
+
+.box button[type="submit"] {
+  background-image: linear-gradient(to right, var(--primary-color), rgb(0, 92, 197));
+  width: 100%;
+  border: none;
+  padding: 8px;
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.box button[type="submit"]:hover {
+  background-image: linear-gradient(to right, rgb(0, 80, 172), rgb(80, 19, 195));
+}
+ 
   
   /* ====================== Responsive Design ========================== 
   @media (max-width: 991px) {
@@ -534,59 +648,114 @@ body.dark .switch::before{
       width: calc(100% - 80px);
       left: 40px;
       min-height: 100vh;
-      background: var(--siderbar-color);
       transition: 0.5s;
       padding-bottom: 10px;
       display: flex;
       padding-bottom: 20px;
       border-radius: 10px;
     }
-
-    .main3 .graphic {
-      width: 40vw;
-      height: 70vh;
+    
+    .main3 .cart,
+    .main3 .counten {
+      flex: 1;
       padding: 10px;
       margin: 15px;
       margin-top: 10px;
     }
-
-    .main3 .counten{
-      width: 40vw;
-      height: 60vh;
-      padding: 10px;
-      margin: 15px;
-      margin-top: 10px;
+  
+    .main3 .cart,
+    .main3 .counten {
+      max-width: 40vw;
     }
-
-    .counten table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
+    
+    .main3 .cart h2,
+    .main3 .counten h2 {
+      max-width: 100%;
     }
-    .main3 .counten table thead td {
-      font-weight: 600;
-    }
-    .main3 .counten table tr {
+    
+    .credit-card2 {
+      background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
+      padding: 30px 60px  30px 60px; 
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
       color: var(--text-color);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    .main3 .counten table tr:last-child {
-      border-bottom: none;
-    }
-    .main3 .counten table tr td {
-      padding: 20px;
-    }
-    .main3 .counten table tr td:last-child {
-      text-align: end;
-    }
-    .main3 .counten table tr td:nth-child(2) {
-      text-align: end;
-    }
-    .main3 .counten table tr td:nth-child(3) {
-      text-align: end;
-    }
+      width: 90%;
+  }
+  
+  .card-header2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+  
+  .card-number2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+  }
+  
+  .card-info2 {
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  .info-item2 {
+      text-align: center;
+  }
 
+  .card-title2{
+    font-weight: 700;
+  }
 
+  .coin {
+    background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
+    padding: 10px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: var(--text-color2);
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+  }
+  
+  .coin:hover {
+    transform: scale(1.08);
+  }
+  
+  .coin .name,
+  .coin .amount {
+    width: 48%;
+  }
+  
+  .coin .amount,
+  .coin .name {
+    color: var(--text-color2);
+    font-weight: 500;
+    font-size: 22px;
+  }
+
+  .counten table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgb(20, 20, 20);
+    color: var(--text-color);
+    transform: none;
+}
+
+.counten th, .counten td {
+    border: 1px solid #161616;
+    padding: 10px;
+    text-align: left;
+}
+
+.counten th {
+  background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
+}
 
   /* ========= Setting =========== */
 
@@ -633,12 +802,12 @@ body.dark .switch::before{
   
   .main4 .profile .basic .name {
     font-weight: 700;
-    margin-top: 10px; /* Adjusted top margin for better spacing */
+    margin-top: 10px; 
     color: var(--text-color);
   }
   
   .main4 .profile .alter {
-    width: 100%; /* Adjusted width to take the full width of the container */
+    width: 100%; 
     background: var(--siderbar-color);
     padding: 25px;
     border-radius: 20px;
@@ -646,7 +815,7 @@ body.dark .switch::before{
   
   .main4 .profile .alter form {
     display: grid;
-    gap: 10px; /* Added gap between form elements */
+    gap: 10px;
   }
 
   .main4 .profile .alter form input{
@@ -659,7 +828,7 @@ body.dark .switch::before{
       border-radius: 5px;
       border-bottom: 2px solid #fff;
       outline: none;
-      background: #e4e2e2;
+      background: var(--primary-color-light);
   }
 
   /* ======= Wallet ======*/
@@ -672,7 +841,7 @@ body.dark .switch::before{
 }
 
 .credit-card {
-    background: black;
+   background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
     padding: 30px 60px  30px 60px; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -701,6 +870,41 @@ body.dark .switch::before{
     text-align: center;
 }
 
+
+.transaction-history .alter {
+  display: flex;
+  justify-content: space-between;
+}
+.transaction-history .alter h2{
+  width: 20%;
+}
+
+.transaction-history .alter input[type="number"] {
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--text-color);
+  color: var(--text-color);
+  padding: 5px;
+  width: 60%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.transaction-history .alter button {
+  background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
+  color: var(--text-color); 
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer; 
+}
+
+.transaction-history .alter button:hover{
+  background-color: #0300b3; 
+  outline: none;
+}
+
 .transaction-history {
     width: 100%;
     max-width: 800px;
@@ -721,12 +925,13 @@ body.dark .switch::before{
 }
 
 .transaction-history th {
-    background-color: #161616;
+  background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
 }
 
   body.dark .main4 .profile .alter form input{
       color: #585858;
   }
+
   .profile .alter form button[type="submit"]{
     border-bottom: none;
     background: #9400D3;
@@ -740,7 +945,8 @@ body.dark .switch::before{
     background-color: rgb(22, 6, 253);
     font-weight: bold;
     transition: .3s;
-    color: wheat;
+    color: var(--text-color);
+    transform: scale(1.02);
   }
 
   /* ======== Activity==========*/

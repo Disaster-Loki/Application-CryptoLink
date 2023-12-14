@@ -14,7 +14,6 @@ class UsuarioDTO {
         $this->dataRegistro = $dataRegistro;
     }
 
-    // Métodos de acesso (getters)
     public function getUsername() {
         return $this->username;
     }

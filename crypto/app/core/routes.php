@@ -29,6 +29,10 @@ $routes = [
             'controller'    => 'AdminController',
             'action'        => 'index'
         ],
+        '/user' => [
+            'controller' => 'UserController',
+            'action' => 'index'
+        ],
         
     ],
     'POST' => [
@@ -47,6 +51,10 @@ $routes = [
         '/add-transaction' => [
             'controller'    => 'TransactionController',
             'action'        => 'save'
+        ],
+        '/add-ordem' => [
+            'controller' => 'OrdemController',
+            'action' => 'postAction'
         ]
 
     ],

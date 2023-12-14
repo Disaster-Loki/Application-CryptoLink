@@ -14,9 +14,10 @@
 </head>
 
 <body>
+
   <!-- ========== Siderbar ========= -->
   <nav class="siderbar close">
-    <header>
+  <header>
       <!--<div class="image-text">
         <span class="image">
           <img src="logo.avif" alt="" />
@@ -93,10 +94,10 @@
       <div class="main">
         <!-- ======================= Cards ================== -->
         <div class="cardBox">
-          <div class="card">
+          <div class="card" onclick="ShowPage('customers')">
             <div>
               <div class="numbers"><?= count($users) ?></div>
-              <div class="cardName">Usuarios</div>
+              <div class="cardName">Users</div>
             </div>
 
             <div class="iconBx">
@@ -153,97 +154,30 @@
         <div class="details">
           <div class="recentOrders">
             <div class="cardHeader">
-              <h2>Usuarios</h2>
+              <h2>Users</h2>
               <a href="#" class="btn">View All</a>
             </div>
-
             <table>
               <thead>
                 <tr>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Registration Date</th>
+                  <td>Username</td>
+                  <td>Email</td>
+                  <td>Registration Date</td>
+                  <td>Status</td>
                 </tr>
               </thead>
+
               <tbody>
                 <?php foreach ($users as $user) : ?>
                   <tr>
                     <td><?php echo $user['Username']; ?></td>
                     <td><?php echo $user['Email']; ?></td>
                     <td><?php echo $user['DataRegistro']; ?></td>
+                    <td><span class="status delivered">Active</span></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
             </table>
-
-            <!--<table>
-                        <thead>
-                            <tr>
-                                <td>Username</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-                        </tbody>
-                    </table>-->
           </div>
         </div>
       </div>
@@ -317,7 +251,7 @@
             </form>
           </div>
         </div>
-        <div class="activity">
+        <!--<div class="activity">
           <div class="title">
             <h2>Activity</h2>
           </div>
@@ -356,7 +290,7 @@
               </table>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

@@ -24,6 +24,25 @@ modeSwitch.addEventListener("click", () => {
   }
 });
 
+// Modal
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sellButton = document.querySelector('.sell-button');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const sellCryptoModal = document.getElementById('sellCryptoModal');
+
+  sellButton.addEventListener('click', function () {
+      modalOverlay.style.display = 'flex';
+  });
+
+  // Fechar o modal quando clicar fora dele
+  modalOverlay.addEventListener('click', function (event) {
+      if (event.target === modalOverlay) {
+          modalOverlay.style.display = 'none';
+      }
+  });
+});
+
 // Choose option
 
 // Getting the menu and items
@@ -180,3 +199,62 @@ function generateRandomData() {
   }
   return { labels: labels, values: values };
 }
+
+
+// Graphics 2
+
+document.addEventListener("DOMContentLoaded", function () {
+  var ctx2 = document.getElementById("cryptoChart2").getContext("2d");
+
+  var data2 = {
+      labels: ["Bitcoin", "Ethereum", "Tether USDt", "BNB"],
+      datasets: [{
+          data: [30, 20, 25, 15],
+          backgroundColor: ["#FFD700", "#8A2BE2", "#00CED1", "#228B22"],
+      }],
+  };
+
+  var options2 = {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+          display: true,
+          position: "bottom",
+      },
+  };
+
+  new Chart(ctx2, {
+      type: "doughnut",
+      data: data2,
+      options: options2,
+  });
+});
+
+// Calendar
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Função para criar o calendário
+  function createCalendar() {
+    const calendarElement = document.getElementById("customCalendar");
+    const currentDate = new Date();
+
+    // Obter o último dia do mês
+    const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+    for (let day = 1; day <= lastDay; day++) {
+      const dayElement = document.createElement("div");
+      dayElement.classList.add("day");
+
+      // Destacar o dia atual
+      if (day === currentDate.getDate()) {
+        dayElement.classList.add("current-day");
+      }
+
+      dayElement.textContent = day;
+      calendarElement.appendChild(dayElement);
+    }
+  }
+
+  // Chamar a função para criar o calendário ao carregar a página
+  createCalendar();
+});

@@ -39,6 +39,8 @@ body.dark{
     --text-color: #CCC;
 }
 
+/*===== Header=====*/
+
 /* ===== Siderbar ===== */
 .siderbar{
     position: fixed;
@@ -402,16 +404,13 @@ body.dark .switch::before{
     width: calc(100% - 80px);
     left: 40px;
     min-height: 100vh;
-    background: var(--siderbar-color);
     transition: 0.5s;
-    border-radius: 10px;
-    
   }
   
   .main2 .details{
     margin: 3px;
     padding: 3px;
-    border-radius: 10px;
+    border-radius: 1px;
   }
   .details {
     position: relative;
@@ -424,11 +423,10 @@ body.dark .switch::before{
   .details .recentOrders {
     position: relative;
     display: grid;
-    min-height: 500px;
     background: var(--siderbar-color);
-    padding: 20px;
+    padding: 14px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
+    border-radius: 10px;
   }
   
   .details .cardHeader {
@@ -456,6 +454,7 @@ body.dark .switch::before{
   }
   .details table thead td {
     font-weight: 600;
+    font-size: 18px;
   }
   .details .recentOrders table tr {
     color: var(--text-color);
@@ -464,18 +463,25 @@ body.dark .switch::before{
   .details .recentOrders table tr:last-child {
     border-bottom: none;
   }
+  .details .recentOrders table tbody tr {
+    color: var(--text-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 0; /* Remove space between user rows */
+  }
   .details .recentOrders table tbody tr:hover {
     background: var(--primary-color);
     color: var(--siderbar-color);
+    border-radius: 4px;
+    transition: 0.5s;
   }
   .details .recentOrders table tr td {
     padding: 10px;
   }
   .details .recentOrders table tr td:last-child {
-    text-align: end;
+    text-align: left;
   }
   .details .recentOrders table tr td:nth-child(2) {
-    text-align: end;
+    text-align: left;
   }
   .details .recentOrders table tr td:nth-child(3) {
     text-align: center;
@@ -789,5 +795,3 @@ body.dark .switch::before{
   .container .element table tr td:nth-child(3) {
     text-align: center;
   }
-  
-

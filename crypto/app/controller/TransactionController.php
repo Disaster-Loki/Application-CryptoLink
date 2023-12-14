@@ -12,7 +12,7 @@ class TransactionController extends Controller
         $amount = $_POST['amount'];
         $id = $_POST['id'];
         $type = 'Deposito';
-
+        
         $transaction = new TransactionDAO;
         if($transaction->save($amount, $type, $id)) return redirect(base_url('home'));
     }

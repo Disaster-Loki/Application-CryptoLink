@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +13,6 @@
 </head>
 
 <body>
-  <?php include_once("header.php") ?>
   <br>
   <!-- ========== Siderbar ========= -->
   <nav class="siderbar close">
@@ -128,7 +125,7 @@
           <div class="card">
             <div>
               <div class="numbers">284</div>
-              <div class="cardName">Over</div>
+              <div class="cardName">Bitcoin</div>
             </div>
 
             <div class="iconBx">
@@ -147,12 +144,14 @@
             </div>
           </div>
         </div>
-        <!-- Grafics-->
-        <!--<div class="grafics">
-            <canvas id="bitcoin-chart" class="chart-card"></canvas>
-            <canvas id="ethereum-chart" class="chart-card"></canvas>
-            <canvas id="bnb-chart" class="chart-card"></canvas>
+        <div class="graphic" id="">
+          <canvas id="cryptoChart"></canvas>
+        </div>
+        <!--<div class="calendar" id="customCalendar">
         </div>-->
+        <div class="graphic2-" id="">
+          <canvas id="cryptoChart2-"></canvas>
+        </div>
       </div>
     </div>
 
@@ -161,6 +160,9 @@
         <hr>
       </div>
       <div class="main2">
+        <div class="button">
+          <button class="sell-button"> Sell </button>
+        </div>
         <div class="cardBox2">
           <div class="card2">
             <div class="iconBx2">
@@ -170,49 +172,41 @@
               <div class="cardName2">Vendedor</div>
               <div class="postDate">Data</div>
             </div>
-            <div class="numbers2">R$ 80,00</div>
+            <button class="numbers2">R$ 80,00</button>
           </div>
-          <div class="card2">
-            <div class="iconBx2">
-              <ion-icon name="">
-                <img src="ethereum.png" alt="Ethereum" style="color: white;">
-              </ion-icon>
-            </div>
-            <div class="info">
-              <div class="cardName2">Vendedor</div>
-              <div class="postDate">Data</div>
-            </div>
-            <div class="numbers2">R$ 80,00</div>
-          </div>
-          <div class="card2">
-            <div class="iconBx2">
-              <ion-icon name="logo-bitcoin"></ion-icon>
-            </div>
-            <div class="info">
-              <div class="cardName2">Vendedor</div>
-              <div class="postDate">Data</div>
-            </div>
-            <div class="numbers2">R$ 80,00</div>
-          </div>
-          <div class="card2">
-            <div class="iconBx2">
-              <ion-icon name="logo-bitcoin"></ion-icon>
-            </div>
-            <div class="info">
-              <div class="cardName2">Vendedor</div>
-              <div class="postDate">Data</div>
-            </div>
-            <div class="numbers2">R$ 80,00</div>
-          </div>
-          <div class="card2">
-            <div class="iconBx2">
-              <ion-icon name="logo-bitcoin"></ion-icon>
-            </div>
-            <div class="info">
-              <div class="cardName2">Vendedor</div>
-              <div class="postDate">Data</div>
-            </div>
-            <div class="numbers2">R$ 80,00</div>
+        </div>
+      </div>
+
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="sellCryptoModal">
+          <div id="sell-crypto" class="box">
+            <form action="<?= base_url("add-ordem") ?>" method="post">
+              <Fieldset>
+                <legend><b>Sell</b></legend>
+                <div class="inputBox">
+                  <input class="inputUser" type="text" id="username" name="username" value="<?= $_SESSION['user']['username'] ?>">
+                </div>
+                <div class="inputBox">
+                  <input class="inputUser" type="text" id="data_venda" name="data_venda" value="<?php echo date('Y-m-d'); ?>" readonly>
+                </div>
+                <div class="inputBox">
+                  <select class="inputUser" id="tipo_moeda" name="tipo_moeda" required>
+                    <option value="bitcoin">Bitcoin</option>
+                    <option value="ethereum">Ethereum</option>
+                    <option value="bnb">Tether</option>
+                    <option value="bnb">BNB</option>
+                  </select>
+                </div>
+                <div class="inputBox">
+                  <input class="inputUser" type="text" id="tipo_transacao" name="tipo_transacao" value="venda" readonly>
+                  <input class="inputUser" type="number" id="amount" name="amount" step="any" placeholder="Amount">
+                </div>
+                <div class="inputBox">
+                  <input class="inputUser" type="number" id="preco" name="preco" step="any" placeholder="Price">
+                </div>
+                <button type="submit">Post</button>
+              </Fieldset>
+            </form>
           </div>
         </div>
       </div>
@@ -221,48 +215,57 @@
 
     <div id="over" class="page">
       <div class="text">
-        Exchange
+        Exchange - Coin
         <hr>
       </div>
       <div class="main3">
-        <div class="graphic" id="">
-          <canvas id="cryptoChart"></canvas>
+        <div class="cart">
+          <h2>Cart</h2>
+          <div class="credit-card2">
+          <div class="card-header2">
+            <div class="card-title2"><?= $_SESSION['user']['username'] ?></div>
+            <div class="card-logo2">
+              <ion-icon name="card-outline"></ion-icon>
+            </div>
+          </div>
+          <div class="card-number2">**** **** **** 1234</div>
+          <div class="card-info2">
+            <div class="info-item2">
+              <div class="label2">Validade</div>
+              <div class="value2">16/23</div>
+            </div>
+            <div class="info-item2">
+              <div class="label2">Saldo</div>
+              <div class="value2">Nada</div>
+            </div>
+          </div>
         </div>
-
+        <div class="coin">
+          <span class="name">Bitcoin</span>
+          <span class="amout">79999</span>
+        </div>
+        </div>
         <div class="counten">
+          <h3>Transactions Cryptocurrency</h3>
           <table>
             <thead>
               <tr>
-                <th>Criptomoeda</th>
-                <th>Câmbio (USD)</th>
-                <th>Câmbio (Kwanza)</th>
+                <th>Cryptocurrency</th>
+                <th>Type</th>
+                <th>Value</th>
+                <th>Date</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Bitcoin</td>
-                <td>$50,000</td>
-                <td>550,000 Kz</td>
-              </tr>
-              <tr>
-                <td>Ethereum</td>
-                <td>$3,000</td>
-                <td>33,000 Kz</td>
-              </tr>
-              <tr>
-                <td>Tether USDT</td>
-                <td>$1.00</td>
-                <td>11 Kz</td>
-              </tr>
-              <tr>
-                <td>BNB</td>
-                <td>$500</td>
-                <td>5,500 Kz</td>
-              </tr>
+                <tr>
+                  <td>Nada encon</td>
+                  <td>Nada encon</td>
+                  <td>Nada encon</td>
+                  <td>Nada encon</td>
+                </tr>
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
 
@@ -293,34 +296,33 @@
         </div>
 
         <div class="transaction-history">
-          <h2>Transactions</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($transactions as $transaction): ?>
-              <tr>
-                <td><?= $transaction['DataHoraTransacao'] ?></td>
-                <td><?= $transaction['TipoTransacao'] ?></td>
-                <td>$<?= $transaction['ValorTransacao'] ?></td>
-              </tr>
-              <?php endforeach ?>
-              <!-- Adicione mais linhas conforme necessário -->
-            </tbody>
-          </table>
-
           <div class="alter">
+          <h2>Transactions</h2>
             <form action="add-transaction" method="post">
               <input type="number" placeholder="Valor" required name="amount" min="10">
               <input type="hidden" name="id" value="<?= getUserByNickname($_SESSION['user']['username'])[0]['UserID'] ?>">
               <button type="submit" class="butt">Change</button>
             </form>
           </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Value</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($transactions as $transaction) : ?>
+                <tr>
+                  <td><?= $transaction['TipoTransacao'] ?></td>
+                  <td>$<?= $transaction['ValorTransacao'] ?></td>
+                  <td><?= $transaction['DataHoraTransacao'] ?></td>
+                </tr>
+              <?php endforeach ?>
+              <!-- Adicione mais linhas conforme necessário -->
+            </tbody>
+          </table>
 
         </div>
       </div>
@@ -401,6 +403,7 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
   <!-- ======== Graphics=========== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
