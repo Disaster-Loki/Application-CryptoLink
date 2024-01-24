@@ -19,7 +19,7 @@ class WalletDAO
     {
         $referencia = $this->gerarReferenciaCarteira();
 
-        $stmt = $this->connection->prepare("INSERT INTO carteira (UserID, SaldoCriptomoeda, referencia) VALUES (?, 0, ?)");
+        $stmt = $this->connection->prepare("INSERT INTO carteira (UserID, SaldoCriptomoeda, referencia, TipoUsuario) VALUES (?, 0, ?)");
         $stmt->bindParam(1, $userID, PDO::PARAM_INT);
         $stmt->bindParam(2, $referencia, PDO::PARAM_STR);
         $stmt->execute();

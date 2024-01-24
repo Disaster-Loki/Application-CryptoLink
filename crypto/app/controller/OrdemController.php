@@ -9,17 +9,20 @@ class OrdemController extends Controller
 {
     public function postAction($request)
     {
-        $userId = $request->userId; 
-        $tipoOrdem = 'venda';
-        $criptomoeda = $request->tipo_moeda;
-        $quantidade = $request->amount;
-        $preco = $request->preco;
-        $statusOrdem = 'Aberta';
-
-        $ordemDTO = new OrdemDTO($userId, $tipoOrdem, $criptomoeda, $quantidade, $preco, $statusOrdem);
+        // echo '<pre>';
+        // exit(var_dump($_POST));
+        
+        $usuario = getUserByNickname($_POST['username']);
+        $ordem['userID'] = (int) $usuario[0]['UserID'];
+        $ordem['tipoOrdem'] = $_POST['tipo_transacao'];
+        $ordem['criptomoeda'] = $_POST['tipo_moeda'];
+        $ordem['quantidade'] = (int)$_POST['amount'];
+        $ordem['preco'] = (int)$_POST['preco'];
+        $ordem['status'] = 'Aberta';
+        $ordem['tipoUsuario'] = isset($_SESSION['anonimo']) ? 'Anonymous' : 'Common';
 
         $ordemDAO = new OrdemDAO();
-        $ordemDAO->inserirOrdem($ordemDTO);
+        $ordemDAO->inserirOrdem($ordem);
 
         redirect(base_url('user'));
         exit();

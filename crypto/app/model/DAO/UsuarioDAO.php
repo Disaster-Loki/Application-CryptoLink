@@ -20,19 +20,15 @@ class UsuarioDAO {
         }
 
         try {
-            // Cria a consulta SQL para inserir o usuário
             $sql = "INSERT INTO usuario (email, username, password, dataRegistro) VALUES (?, ?, ?, ?)";
 
-            // Prepara a declaração SQL
             $stmt = $this->connection->prepare($sql);
 
-            // Obtém a data atual
             $dataAtual = date("Y-m-d H:i:s");
 
-            // Executa a declaração com os parâmetros
             $stmt->execute([$email, $username, $password, $dataAtual]);
 
-            echo "Registro bem-sucedido!";
+            echo '<script>alert("Registro bem-sucedido!")</script>';
         } catch (PDOException $e) {
             // Handle error
             exit("Erro ao inserir usuário: " . $e->getMessage());
@@ -63,20 +59,12 @@ class UsuarioDAO {
 
     private function userExists($username) {
         try {
-            // Cria a consulta SQL para verificar se o usuário já existe
             $sql = "SELECT COUNT(*) FROM usuario WHERE username = ?";
-
-            // Prepara a declaração SQL
             $stmt = $this->connection->prepare($sql);
-
-            // Executa a declaração com o parâmetro
             $stmt->execute([$username]);
-
-            // Obtém o resultado da contagem
             $count = $stmt->fetchColumn();
-
-            // Retorna true se o usuário já existe, false caso contrário
             return $count > 0;
+
         } catch (PDOException $e) {
             // Handle error
             echo "Erro ao verificar existência do usuário: " . $e->getMessage();
@@ -89,18 +77,15 @@ class UsuarioDAO {
             $sql = "SELECT * FROM usuario WHERE username = ? AND password = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$username, $password]);
-
+    
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    
             if ($user) {
-                echo "Login bem-sucedido!";
                 return true;
             } else {
-                echo "Usuário ou senha incorretos.";
                 return false;
             }
         } catch (PDOException $e) {
-            exit("Erro ao realizar login: " . $e->getMessage());
             return false;
         }
     }

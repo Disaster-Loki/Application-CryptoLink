@@ -71,6 +71,12 @@
       </div>
       <div class="botton-content">
         <li class="n">
+          <a href="<?= base_url('clear') ?>">
+            <i class='bx bx-trash icon'></i>
+            <span class="text nav-text">Clear</span>
+          </a>
+        </li>
+        <li class="n">
           <a href="<?= base_url('logout') ?>">
             <i class='bx bx-log-out icon'></i>
             <span class="text nav-text">Logout</span>
@@ -163,18 +169,21 @@
         <div class="button">
           <button class="sell-button"> Sell </button>
         </div>
-        <div class="cardBox2">
-          <div class="card2">
-            <div class="iconBx2">
-              <ion-icon name="logo-bitcoin"></ion-icon>
+        <?php foreach ($ordens as $ordem) : ?>
+          <div class="cardBox2">
+            <div class="card2">
+              <div class="iconBx2">
+                <ion-icon name="logo-bitcoin"></ion-icon>
+              </div>
+              <div class="info">
+                <div class="cardName2"><?= $ordem['Username'] ?></div>
+                <div class="cardName2"><?= $ordem['Quantidade'] ?></div>
+                <div class="cardName2"><?= $ordem['criptomoeda'] ?></div>
+              </div>
+              <button class="numbers2">$ <?= $ordem['Preco'] ?></button>
             </div>
-            <div class="info">
-              <div class="cardName2">Vendedor</div>
-              <div class="postDate">Data</div>
-            </div>
-            <button class="numbers2">R$ 80,00</button>
           </div>
-        </div>
+        <?php endforeach ?>
       </div>
 
       <div class="modal-overlay" id="modalOverlay">
@@ -198,7 +207,7 @@
                   </select>
                 </div>
                 <div class="inputBox">
-                  <input class="inputUser" type="text" id="tipo_transacao" name="tipo_transacao" value="venda" readonly>
+                  <input class="inputUser" type="text" id="tipo_transacao" name="tipo_transacao" value="Venda" readonly>
                   <input class="inputUser" type="number" id="amount" name="amount" step="any" placeholder="Amount">
                 </div>
                 <div class="inputBox">
@@ -222,28 +231,30 @@
         <div class="cart">
           <h2>Cart</h2>
           <div class="credit-card2">
-          <div class="card-header2">
-            <div class="card-title2"><?= $_SESSION['user']['username'] ?></div>
-            <div class="card-logo2">
-              <ion-icon name="card-outline"></ion-icon>
+            <div class="card-header2">
+              <div class="card-title2"><?= $_SESSION['user']['username'] ?></div>
+              <div class="card-logo2">
+                <ion-icon name="card-outline"></ion-icon>
+              </div>
+            </div>
+            <div class="card-number2">**** **** **** 1234</div>
+            <div class="card-info2">
+              <div class="info-item2">
+                <div class="label2">Validade</div>
+                <div class="value2">16/23</div>
+              </div>
+              <div class="info-item2">
+                <div class="label2">Saldo</div>
+                <div class="value2"><?= $totalCripto ?></div>
+              </div>
             </div>
           </div>
-          <div class="card-number2">**** **** **** 1234</div>
-          <div class="card-info2">
-            <div class="info-item2">
-              <div class="label2">Validade</div>
-              <div class="value2">16/23</div>
+          <?php foreach ($userCripto as $cripto) : ?>
+            <div class="coin">
+              <span class="name"><?= $cripto['Criptomoeda'] ?></span>
+              <span class="amout"><?= $cripto['total'] ?></span>
             </div>
-            <div class="info-item2">
-              <div class="label2">Saldo</div>
-              <div class="value2">Nada</div>
-            </div>
-          </div>
-        </div>
-        <div class="coin">
-          <span class="name">Bitcoin</span>
-          <span class="amout">79999</span>
-        </div>
+          <?php endforeach ?>
         </div>
         <div class="counten">
           <h3>Transactions Cryptocurrency</h3>
@@ -257,12 +268,12 @@
               </tr>
             </thead>
             <tbody>
-                <tr>
-                  <td>Nada encon</td>
-                  <td>Nada encon</td>
-                  <td>Nada encon</td>
-                  <td>Nada encon</td>
-                </tr>
+              <tr>
+                <td>Nada encon</td>
+                <td>Nada encon</td>
+                <td>Nada encon</td>
+                <td>Nada encon</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -297,7 +308,7 @@
 
         <div class="transaction-history">
           <div class="alter">
-          <h2>Transactions</h2>
+            <h2>Transactions</h2>
             <form action="add-transaction" method="post">
               <input type="number" placeholder="Valor" required name="amount" min="10">
               <input type="hidden" name="id" value="<?= getUserByNickname($_SESSION['user']['username'])[0]['UserID'] ?>">

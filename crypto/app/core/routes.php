@@ -33,6 +33,10 @@ $routes = [
             'controller' => 'UserController',
             'action' => 'index'
         ],
+        '/clear' => [
+            'controller'    => 'AccountSettings',
+            'action'        => 'deleteAccount'
+        ]
         
     ],
     'POST' => [

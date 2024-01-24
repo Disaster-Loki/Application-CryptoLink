@@ -2,6 +2,7 @@
 
 namespace crypto\controller;
 use crypto\core\Controller;
+use crypto\model\DAO\OrdemDAO;
 use crypto\model\DAO\TransactionDAO;
 use crypto\model\DAO\UsuarioDAO;
 
@@ -11,10 +12,25 @@ class UserController extends Controller
     {
         // exit(var_dump(getUserByNickname($_SESSION['user']['username'])[0]['UserID']));
         
+        $ordem = new OrdemDAO;
+        $ordens = $ordem->buscarOrdens();
+
+        //exit(var_dump($_SESSION));
+        $userCripto = $ordem->buscarOrdemPorUsuario(getUserByNickname($_SESSION['user']['username'])[0]['UserID']);
+        $totalCripto = $ordem->getTotalOrdemUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID']) ?? 0;
+
+        //echo '<pre>';
+        //exit(var_dump($totalCripto));
+        if(empty($totalCripto)){
+            $tCrypto = 0;
+        }else{
+            $tCrypto = $totalCripto[0]['total'];
+        }
+        
         $trDAO = new TransactionDAO;
         $total = $trDAO->getTotalByUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID'])[0]['total'];
         $transactions = $trDAO->getTransactionByUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID']);
-        return $this->render("user/user", ['transactions' => $transactions, 'total' => $total]);
+        return $this->render("user/user", ['transactions' => $transactions, 'total' => $total, 'ordens' => $ordens, 'userCripto' => $userCripto, 'totalCripto' => $tCrypto]);
     }
 
     public function admin()
