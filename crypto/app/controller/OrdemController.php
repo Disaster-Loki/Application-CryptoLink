@@ -3,7 +3,8 @@ namespace crypto\controller;
 
 use crypto\core\Controller;
 use crypto\model\DAO\OrdemDAO;
-use crypto\model\DTO\OrdemDTO;
+use crypto\model\DAO\TransactionDAO;
+use crypto\model\DAO\WalletDAO;
 
 class OrdemController extends Controller
 {
@@ -26,6 +27,29 @@ class OrdemController extends Controller
 
         redirect(base_url('user'));
         exit();
+    }
+
+    public function buyCrypto()
+    {
+        $id = (int) $_GET['id'];
+        $ordemDAO = new OrdemDAO();
+
+        $currentOrder   = $ordemDAO->buscarOrdemPorId($id);
+        $buyerID        = (int) getUserByNickname($_SESSION['user']['username'])[0]['UserID'];
+        $sellerID       = (int) $currentOrder['UserID'];
+        $price          = (int) $currentOrder['Preco'];
+
+        $walletDao = new WalletDAO();
+        $walletDao->insertInWallet($buyerID, $currentOrder['Criptomoeda'], $currentOrder['Quantidade'], 'Common');
+
+        $ordemDAO->deleteOrder($currentOrder['OrderID']);
+
+        $transaction = new TransactionDAO();    
+        $transaction->save(-$price, 'Compra', $buyerID);
+        $transaction->save($price, 'Venda', $sellerID);
+
+        return redirect('home');
+
     }
 }
 

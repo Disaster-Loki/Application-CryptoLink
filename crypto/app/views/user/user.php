@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>user</title>
+  <title>User</title>
   <!-- ======== Style ========= -->
   <link rel="stylesheet" href="<?= base_url('public/') ?>css/style-user.css">
   <!-- Boxicons CSS -->
@@ -71,7 +71,11 @@
       </div>
       <div class="botton-content">
         <li class="n">
-          <a href="<?= base_url('clear') ?>">
+          <!-- <a href="<?= base_url('clear') ?>">
+            <i class='bx bx-trash icon'></i>
+            <span class="text nav-text">Clear</span>
+          </a> -->
+          <a href="javascript:void(0)" id="btnClear">
             <i class='bx bx-trash icon'></i>
             <span class="text nav-text">Clear</span>
           </a>
@@ -178,9 +182,17 @@
               <div class="info">
                 <div class="cardName2"><?= $ordem['Username'] ?></div>
                 <div class="cardName2"><?= $ordem['Quantidade'] ?></div>
-                <div class="cardName2"><?= $ordem['criptomoeda'] ?></div>
+                <div class="cardName2"><?= $ordem['Criptomoeda'] ?></div>
               </div>
-              <button class="numbers2">$ <?= $ordem['Preco'] ?></button>
+              <?php if ($userID == $ordem['UserID']) : ?>
+                <button class="numbers2" ?>$ <?= $ordem['Preco'] ?> (Propriedade)</button>
+              <?php else : ?>
+                <?php if ($total < $ordem['Preco']) : ?>
+                  <button class="numbers2" ?>$ <?= $ordem['Preco'] ?> (Saldo insuficiente)</button>
+                <?php else : ?>
+                  <a class="numbers2" href="<?= base_url('buy-crypto?id=') . $ordem['OrderID'] ?>">$ <?= $ordem['Preco'] ?></a>
+                <?php endif ?>
+              <?php endif ?>
             </div>
           </div>
         <?php endforeach ?>
@@ -202,7 +214,7 @@
                   <select class="inputUser" id="tipo_moeda" name="tipo_moeda" required>
                     <option value="bitcoin">Bitcoin</option>
                     <option value="ethereum">Ethereum</option>
-                    <option value="bnb">Tether</option>
+                    <option value="tether">Tether</option>
                     <option value="bnb">BNB</option>
                   </select>
                 </div>
@@ -237,7 +249,7 @@
                 <ion-icon name="card-outline"></ion-icon>
               </div>
             </div>
-            <div class="card-number2">**** **** **** 1234</div>
+            <div class="card-number2"><?= $referencia ?></div>
             <div class="card-info2">
               <div class="info-item2">
                 <div class="label2">Validade</div>
@@ -258,22 +270,34 @@
         </div>
         <div class="counten">
           <h3>Transactions Cryptocurrency</h3>
+          <!--<form class="form-wallet" action="" method="post">
+            <select class="inputUser" id="" name="">
+              <option value="bitcoin">Bitcoin</option>
+              <option value="ethereum">Ethereum</option>
+              <option value="tether">Tether</option>
+              <option value="bnb">BNB</option>
+            </select>
+            <input type="number" placeholder="amount" name="amount" min="1">
+            <button type="submit" class="butt">Add</button>
+          </form>-->
           <table>
             <thead>
               <tr>
                 <th>Cryptocurrency</th>
-                <th>Type</th>
+                <th>Referencia</th>
                 <th>Value</th>
-                <th>Date</th>
+                <!-- <th>Date</th> -->
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Nada encon</td>
-                <td>Nada encon</td>
-                <td>Nada encon</td>
-                <td>Nada encon</td>
-              </tr>
+              <?php foreach ($transactionWallet as $tw) : ?>
+                <tr>
+                  <!-- <td>Nada encon</td> -->
+                  <td><?= $tw['Tipo_moeda'] ?></td>
+                  <td><?= $tw['referencia'] ?></td>
+                  <td><?= $tw['SaldoCriptomoeda'] ?></td>
+                </tr>
+              <?php endforeach ?>
             </tbody>
           </table>
         </div>
@@ -418,6 +442,15 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    var btnClear = document.getElementById("btnClear");
+
+    btnClear.addEventListener("click", function(){
+      alert("Eliminado com sucesso.")
+      window.location.href = "clear"
+    })
+  </script>
 </body>
 
 </html>

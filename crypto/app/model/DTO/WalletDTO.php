@@ -8,4 +8,6 @@ class WalletDTO
     public $UserID;
     public $SaldoCriptomoeda;
     public $referencia;
+    public $tipomoeda;
+    public $tipoUsuario;
 }

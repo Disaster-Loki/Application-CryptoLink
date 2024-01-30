@@ -32,7 +32,7 @@ class LoginController extends Controller
         echo json_encode(['success' => true, 'redirect' => base_url('home')]);
         exit();
     } else {
-        // Exibir um alerta em JavaScript sem redirecionar
+        // Exibir um alerta em JavaScript sem redireciona
         echo json_encode(['success' => false, 'message' => 'Usuário ou senha incorreto.']);
         exit();
     }

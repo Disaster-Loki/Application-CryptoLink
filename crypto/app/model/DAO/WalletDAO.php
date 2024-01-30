@@ -2,37 +2,76 @@
 
 namespace crypto\model\DAO;
 
-use crypto\model\DTO\WalletDTO;
 use crypto\model\connect\Connection;
 use PDO;
-use PDOException;
 
 class WalletDAO
 {
     private $connection;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->connection = Connection::getInstance()->connect();
     }
 
-    public function createWallet(int $userID)
+    public function insertInWallet(int $userID, string $tipoMoeda, int $quantidade, string $tipoUsuario)
     {
-        $referencia = $this->gerarReferenciaCarteira();
+        $referencia = $this->gerarReferenciaCarteira($userID);
 
-        $stmt = $this->connection->prepare("INSERT INTO carteira (UserID, SaldoCriptomoeda, referencia, TipoUsuario) VALUES (?, 0, ?)");
-        $stmt->bindParam(1, $userID, PDO::PARAM_INT);
-        $stmt->bindParam(2, $referencia, PDO::PARAM_STR);
+
+        $query = "INSERT INTO carteira (UserID, SaldoCriptomoeda, referencia, TipoUsuario, Tipo_moeda) 
+                  VALUES (:userId, :saldo, :referencia, :tipoUsuario, :moeda)";
+
+        $stmt = $this->connection->prepare($query);
+
+        // echo '<pre>';
+        // exit(var_dump($ordem));
+
+        $stmt->bindParam(':userId', $userID);
+        $stmt->bindParam(':saldo', $quantidade);
+        $stmt->bindParam(':referencia', $referencia);
+        $stmt->bindParam(':tipoUsuario', $tipoUsuario);
+        $stmt->bindParam(':moeda', $tipoMoeda);
+
         $stmt->execute();
-        $stmt->closeCursor();
+    }
+
+    public function getWalletByUser(int $id) {
+        try {
+            $sql = "SELECT * FROM carteira where UserID = '$id'";
+            $stmt = $this->connection->query($sql);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            exit("Erro ao obter transacao: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getTotalByUser(int $id) {
+        try {
+            $sql = "SELECT SUM(SaldoCriptomoeda) as total FROM carteira where UserID = '$id'";
+            $stmt = $this->connection->query($sql);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            exit("Erro ao obter total: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    private function gerarReferenciaCarteira(int $id)
+    {
+        $prefixo = "50484560" + $id;
+        $valorInicial = 4700;
+        $proximoQuarteto = sprintf('%04d', $valorInicial + 1);
+        $referencia = $prefixo . $proximoQuarteto;
 
         return $referencia;
     }
 
-    private function gerarReferenciaCarteira()
+    private function getTipoUsuario(int $userID)
     {
-        $prefixo = "5048";
-        $numeroAleatorio = mt_rand(100000000000, 999999999999);
-        $referencia = $prefixo . $numeroAleatorio;
-        return $referencia;
+        $tipoUsuario = isset($_SESSION['anonimo']) ? 'Anonymous' : 'Common';
+
+        return $tipoUsuario;
     }
 }

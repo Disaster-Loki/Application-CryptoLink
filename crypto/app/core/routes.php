@@ -36,7 +36,11 @@ $routes = [
         '/clear' => [
             'controller'    => 'AccountSettings',
             'action'        => 'deleteAccount'
-        ]
+        ],
+        '/buy-crypto' => [
+            'controller'    => 'OrdemController',
+            'action'        => 'buyCrypto'
+        ],
         
     ],
     'POST' => [

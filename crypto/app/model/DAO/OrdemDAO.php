@@ -80,6 +80,14 @@ class OrdemDAO
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function deleteOrder(int $orderID)
+    {
+        $query = "DELETE FROM ordem WHERE OrderID = :orderID";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':orderID', $orderID);
+        $stmt->execute();
+    }
+
     public function deleteUserOrder(int $userID)
     {
         $query = "DELETE FROM ordem WHERE UserID = :userID";

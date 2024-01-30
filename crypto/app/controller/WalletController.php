@@ -3,13 +3,22 @@
 namespace crypto\controller;
 
 use crypto\model\DAO\WalletDAO;
-use crypto\model\DAO\WalletDAODAO;
 
 class WalletController
 {
-    public function criarCarteiraAction($userID)
+    public function criarCarteiraAction()
     {
-        $walletDAO = new WalletDAO();
-        $referencia = $walletDAO->CreateWallet($userID);
+        $userID = $_SESSION['user_id'] ?? null;
+
+        if ($userID) {
+            $tipoMoeda = $_POST['tipo_moeda'] ?? '';
+            $quantidade = $_POST['amount'] ?? '';
+
+            $walletDAO = new WalletDAO();
+            $referencia = $walletDAO->insertInWallet($userID, $tipoMoeda, $quantidade);
+            echo "Carteira criada com referência: " . $referencia;
+        } else {
+            echo "Usuário não autenticado.";
+        }
     }
 }

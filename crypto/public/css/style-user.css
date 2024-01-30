@@ -737,6 +737,51 @@ body.dark .switch::before{
     font-size: 22px;
   }
 
+  .counten .form-wallet {
+    width: 50%;
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+  }
+  
+  .counten .form-wallet .inputUser {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--text-color);
+    outline: none;
+    color: var(--text-color);
+    font-size: 15px;
+    width: 100%;
+    padding: 10px;
+    letter-spacing: 2px;
+  }
+  
+  .counten .form-wallet input[type="number"]{
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 5px;
+    width: 60%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  
+  .counten .form-wallet button {
+    background-image: linear-gradient(rgb(17, 0, 77), var(--primary-color));
+    color: var(--text-color); 
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer; 
+  }
+  
+  .counten .form-wallet button:hover{
+    background-color: #0300b3; 
+    outline: none;
+  }
+
   .counten table {
     width: 100%;
     border-collapse: collapse;

@@ -5,22 +5,28 @@ use crypto\core\Controller;
 use crypto\model\DAO\OrdemDAO;
 use crypto\model\DAO\TransactionDAO;
 use crypto\model\DAO\UsuarioDAO;
+use crypto\model\DAO\WalletDAO;
 
 class UserController extends Controller
 {
     public function index()
     {
+        if(!isset($_SESSION["user"])){
+            exit("Precisa iniciar sessao");
+        }
         // exit(var_dump(getUserByNickname($_SESSION['user']['username'])[0]['UserID']));
         
+        $userID = (int) getUserByNickname($_SESSION['user']['username'])[0]['UserID'];
         $ordem = new OrdemDAO;
         $ordens = $ordem->buscarOrdens();
 
-        //exit(var_dump($_SESSION));
-        $userCripto = $ordem->buscarOrdemPorUsuario(getUserByNickname($_SESSION['user']['username'])[0]['UserID']);
-        $totalCripto = $ordem->getTotalOrdemUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID']) ?? 0;
+        // echo '<pre>';
+        // exit(var_dump($userID));
 
-        //echo '<pre>';
-        //exit(var_dump($totalCripto));
+        $userCripto = $ordem->buscarOrdemPorUsuario($userID);
+        $totalCripto = $ordem->getTotalOrdemUser($userID) ?? 0;
+
+
         if(empty($totalCripto)){
             $tCrypto = 0;
         }else{
@@ -28,9 +34,19 @@ class UserController extends Controller
         }
         
         $trDAO = new TransactionDAO;
-        $total = $trDAO->getTotalByUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID'])[0]['total'];
-        $transactions = $trDAO->getTransactionByUser(getUserByNickname($_SESSION['user']['username'])[0]['UserID']);
-        return $this->render("user/user", ['transactions' => $transactions, 'total' => $total, 'ordens' => $ordens, 'userCripto' => $userCripto, 'totalCripto' => $tCrypto]);
+        $total = (int) $trDAO->getTotalByUser($userID)[0]['total'];
+
+        $wlDao          = new WalletDAO();
+        $totalWallet    = (int) $wlDao->getTotalByUser($userID)[0]['total'];
+        $transactionsWallet = $wlDao->getWalletByUser($userID);
+
+        
+        $referencia = $transactionsWallet[0]["referencia"] ?? "**** **** **** ****";
+        // echo '<pre>';
+        // exit(var_dump($referencia));
+
+        $transactions = $trDAO->getTransactionByUser($userID);
+        return $this->render("user/user", ['userID' => $userID, "referencia" => $referencia, 'transactionWallet'=> $transactionsWallet,'transactions' => $transactions, 'total' => $total, 'ordens' => $ordens, 'userCripto' => $userCripto, 'totalCripto' => $tCrypto]);
     }
 
     public function admin()
